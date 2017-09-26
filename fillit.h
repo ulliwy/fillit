@@ -12,11 +12,12 @@ typedef struct			s_tet
 {
 	int					row;
 	int					col;
-	char				**shape;
+	char				shape[4][4];
 }						t_tet;
 
-t_list	create_list(int fd);
-t_tet	create_tet(int fd);
+t_list	generate_list(int fd);
+t_tet	*create_tet(char *str);
+int		get_size(t_list *tetriminos);
 
 
 
