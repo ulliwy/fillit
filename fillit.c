@@ -8,12 +8,13 @@ int		put_error()
 
 int		put_usage()
 {
-	//TODO
+	ft_putstr("usage: fillit file_name\n");
+	return (0);
 }
 
 int		main(int argc, char **argv)
 {
-	char	board[104][104];
+	//char	board[104][104];
 	t_list	*tetriminos;
 	int		fd;
 	int		size;
@@ -23,12 +24,12 @@ int		main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (!fd)
 		return (put_error());
-	tetriminos = create_list();
+	tetriminos = create_list(fd);
 	if (!tetriminos)
 		return (put_error());
 	size = get_size(tetriminos);
-	if (!solve(board, size, tetriminos))
-		return (put_error());
-	print_board(board);
+	//if (!solve(board, size, tetriminos))
+	//	return (put_error());
+	//print_board(board);
 	return (0);
 }
