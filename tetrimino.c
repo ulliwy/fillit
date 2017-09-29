@@ -6,13 +6,13 @@ int		calc_conn(char *str, int pos)
 	int		con;
 
 	con = 0;
-	if (str[pos - 1] == '#')
+	if (pos % 5 > 0 && str[pos - 1] == '#')
 		con++;
-	if (str[pos + 1] == '#')
+	if (pos % 5 < 4 && str[pos + 1] == '#')
 		con++;
-	if (str[pos - 5] == '#')
+	if (pos / 5 > 0 && str[pos - 5] == '#')
 		con++;
-	if (str[pos + 5] == '#')
+	if (pos / 5 < 4 && str[pos + 5] == '#')
 		con++;
 	return (con);
 }
@@ -34,20 +34,6 @@ t_tet	*get_tet(char *str, int top, int left)
 			tet->shape[i / 5][i % 5] = str[i];
 		i++;
 	}
-#if 0
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			printf("%c", (tet->shape)[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-#endif
 	return (tet);
 }
 
@@ -68,7 +54,7 @@ t_tet	*create_tet(char *str)
 	left = 4;
 	while (i < 20)
 	{
-		if (i != 0 && i % 5 == 4)
+		if (i % 5 == 4)
 		{
 			if (str[i] != '\n')
 				return (NULL);
