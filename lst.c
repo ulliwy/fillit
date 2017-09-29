@@ -1,4 +1,5 @@
 #include "fillit.h"
+#include <stdio.h>
 
 int		get_size(t_list *begin_list)
 {
@@ -20,10 +21,10 @@ t_list	*create_list(int fd)
 	t_list	*lst;
 	t_list	*current;
 
+	current = NULL;
 	while (read(fd, buf, 20) == 20)
 	{
-		tet = create_tet(buf);
-		if (tet)
+		if ((tet = create_tet(buf)))
 		{
 			if (!current)
 			{
@@ -36,10 +37,8 @@ t_list	*create_list(int fd)
 				current = current->next;
 			}
 		}
-		else
-			return (NULL);
+		//else
+		//	return (NULL);
 	}
 	return (lst);
 }
-
-

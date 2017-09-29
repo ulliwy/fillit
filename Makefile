@@ -5,7 +5,7 @@ SRC = *.c
 all: $(NAME)
 		
 $(NAME):
-	gcc  $(FLAGS) $(SRC) -o $(NAME) -L. -lft
+	gcc  $(FLAGS) $(SRC) -o $(NAME)
 
 clean:
 	rm -f $(SRC:.c=.o)
