@@ -1,4 +1,5 @@
 #include "fillit.h"
+#include <stdio.h>
 
 int		put_error()
 {
@@ -10,6 +11,29 @@ int		put_usage()
 {
 	ft_putstr("usage: fillit file_name\n");
 	return (0);
+}
+
+void	print_list(t_list *tet)
+{
+	int		i;
+	int		j;
+
+	while (tet)
+	{
+		i = 0;
+		while(i < 4)
+		{
+			j = 0;
+			while (j < 4)
+			{
+				printf("%c", (((t_tet *)tet->content)->shape)[i][j]);
+				j++;
+			}
+			printf("\n");
+			i++;
+		}
+		tet = tet->next;
+	}
 }
 
 int		main(int argc, char **argv)
@@ -28,6 +52,7 @@ int		main(int argc, char **argv)
 	if (!tetriminos)
 		return (put_error());
 	size = get_size(tetriminos);
+	print_list(tetriminos);
 	//if (!solve(board, size, tetriminos))
 	//	return (put_error());
 	//print_board(board);

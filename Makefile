@@ -3,9 +3,9 @@ FLAGS = -Wall -Wextra -Werror
 SRC = *.c
 
 all: $(NAME)
-		
-$(NAME):
-	gcc  $(FLAGS) $(SRC) -o $(NAME)
+
+$(NAME): $(SRC)
+	gcc $(FLAGS) $(SRC) -o $(NAME)
 
 clean:
 	rm -f $(SRC:.c=.o)

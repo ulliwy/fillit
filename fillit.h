@@ -27,7 +27,7 @@ int		get_size(t_list *begin_list);
 
 void	ft_putchar(char c);
 void	ft_putstr(char const *s);
-t_list	*ft_lstnew(void const *content, size_t content_size);
+t_list	*ft_lstnew(void *content);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 #endif

@@ -28,17 +28,18 @@ t_list	*create_list(int fd)
 		{
 			if (!current)
 			{
-				current = ft_lstnew(tet, sizeof(tet));
+				current = ft_lstnew(tet);
 				lst = current;
 			}
 			else
 			{
-				current->next = ft_lstnew(tet, sizeof(tet));
+				current->next = ft_lstnew(tet);
 				current = current->next;
 			}
 		}
-		//else
-		//	return (NULL);
+		else
+			return (NULL);
+		read(fd, buf, 1);
 	}
 	return (lst);
 }
