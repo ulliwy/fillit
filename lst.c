@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/29 11:25:29 by iprokofy          #+#    #+#             */
+/*   Updated: 2017/09/29 14:25:30 by iprokofy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
-#include <stdio.h>
 
 int		get_size(t_list *begin_list)
 {
@@ -12,6 +23,30 @@ int		get_size(t_list *begin_list)
 		begin_list = begin_list->next;
 	}
 	return (count);
+}
+
+void	ft_lstdelone(t_list *alst)
+{
+	free(alst->content);
+	free(alst);
+	alst = NULL;
+}
+
+void	ft_lstdel(t_list **alst, void (*del)(t_list *))
+{
+	t_list	*temp;
+	t_list	*current;
+
+	if (!*alst)
+		return ;
+	current = *alst;
+	while (current)
+	{
+		temp = current;
+		current = current->next;
+		del(temp);
+	}
+	*alst = NULL;
 }
 
 t_list	*create_list(int fd)

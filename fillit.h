@@ -29,5 +29,7 @@ void	ft_putchar(char c);
 void	ft_putstr(char const *s);
 t_list	*ft_lstnew(void *content);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	ft_lstdel(t_list **alst, void (*del)(t_list *));
+void	ft_lstdelone(t_list *alst);
 
 #endif

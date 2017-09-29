@@ -32,6 +32,7 @@ void	print_list(t_list *tet)
 			printf("\n");
 			i++;
 		}
+		printf("\n");
 		tet = tet->next;
 	}
 }
@@ -53,6 +54,7 @@ int		main(int argc, char **argv)
 		return (put_error());
 	size = get_size(tetriminos);
 	print_list(tetriminos);
+	ft_lstdel(&tetriminos, &ft_lstdelone);
 	//if (!solve(board, size, tetriminos))
 	//	return (put_error());
 	//print_board(board);
