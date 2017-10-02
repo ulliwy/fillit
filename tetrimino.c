@@ -17,15 +17,17 @@ int		calc_conn(char *str, int pos)
 	return (con);
 }
 
-t_tet	*get_tet(char *str, int top, int left)
+t_tet	*get_tet(char *str, int top, int left, int count)
 {
 	t_tet	*tet;
 	int		i;
 	int		j;
+	char	*alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	tet = (t_tet *)malloc(sizeof(t_tet));
 	tet->row = top;
 	tet->col = left;
+	tet->letter = alpha[count];
 	i = 0;
 	j = 0;
 	while (i < 20)
@@ -37,7 +39,7 @@ t_tet	*get_tet(char *str, int top, int left)
 	return (tet);
 }
 
-t_tet	*create_tet(char *str)
+t_tet	*create_tet(char *str, int count)
 {
 	int		i;
 	int		j;
@@ -79,7 +81,7 @@ t_tet	*create_tet(char *str)
 	if (num == 4 && (con == 6 || con == 8))
 	{
 		//printf("here\n");
-		return (get_tet(str, top, left));
+		return (get_tet(str, top, left, count));
 	}
 	return (NULL);
 }

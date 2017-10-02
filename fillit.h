@@ -17,19 +17,23 @@ typedef struct			s_tet
 {
 	int					row;
 	int					col;
+	char				letter;
 	char				shape[4][4];
 }						t_tet;
 
-t_list	*create_list(int fd);
-t_tet	*create_tet(char *str);
-int		get_size(t_list *tetriminos);
+t_list	*ft_lstnew(void *content);
 int		get_size(t_list *begin_list);
+void	ft_lstdel(t_list **alst, void (*del)(t_list *));
+void	ft_lstdelone(t_list *alst);
+
+t_tet	*create_tet(char *str, int count);
+t_list	*create_list(int fd);
+
+int		solve(char board[104][104], int *size, t_list *tetriminos);
+void 	print_board(char board[104][104], int size);
 
 void	ft_putchar(char c);
 void	ft_putstr(char const *s);
-t_list	*ft_lstnew(void *content);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	ft_lstdel(t_list **alst, void (*del)(t_list *));
-void	ft_lstdelone(t_list *alst);
 
 #endif

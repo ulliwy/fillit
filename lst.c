@@ -6,11 +6,12 @@
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 11:25:29 by iprokofy          #+#    #+#             */
-/*   Updated: 2017/09/29 14:25:30 by iprokofy         ###   ########.fr       */
+/*   Updated: 2017/10/02 12:28:12 by iprokofy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 int		get_size(t_list *begin_list)
 {
@@ -55,11 +56,17 @@ t_list	*create_list(int fd)
 	t_tet	*tet;
 	t_list	*lst;
 	t_list	*current;
+	int		count;
+	int 	is_empty;
 
+	count = 0;
 	current = NULL;
-	while (read(fd, buf, 20) == 20)
+	is_empty = 0;
+	while (!is_empty)
 	{
-		if ((tet = create_tet(buf)))
+		if (read(fd, buf, 20) != 20)
+			return (NULL);
+		if ((tet = create_tet(buf, count)))
 		{
 			if (!current)
 			{
@@ -74,7 +81,9 @@ t_list	*create_list(int fd)
 		}
 		else
 			return (NULL);
-		read(fd, buf, 1);
+		if (!read(fd, buf, 1))
+			is_empty = 1;
+		count++;
 	}
 	return (lst);
 }
