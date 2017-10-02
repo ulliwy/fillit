@@ -6,7 +6,7 @@
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:47:47 by mvann             #+#    #+#             */
-/*   Updated: 2017/10/02 14:01:47 by iprokofy         ###   ########.fr       */
+/*   Updated: 2017/10/02 15:57:06 by iprokofy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "fillit.h"
 
-int		delete_tet(char board[104][104], int size, int row, int col, t_tet *tet)
+int		delete_tet(t_board *brd, int row, int col, t_tet *tet)
 {
 	int i;
 	int j;
@@ -29,9 +29,9 @@ int		delete_tet(char board[104][104], int size, int row, int col, t_tet *tet)
 		{
 			if (tet->shape[tet->row + i][tet->col + j] == '#')
 			{
-				if (col + j >= size || row + i >= size)//redundan
-					return (0);
-				board[row + i][col + j] = 0;
+				//if (col + j >= size || row + i >= size)//redundan
+				//	return (0);
+				(brd->board)[row + i][col + j] = 0;
 			}
 			j++;
 		}
@@ -40,7 +40,7 @@ int		delete_tet(char board[104][104], int size, int row, int col, t_tet *tet)
 	return (1);
 }
 
-int		add_tet(char board[104][104], int size, int row, int col, t_tet *tet)
+int		add_tet(t_board *brd, int row, int col, t_tet *tet)
 {
 	int i;
 	int j;
@@ -53,9 +53,9 @@ int		add_tet(char board[104][104], int size, int row, int col, t_tet *tet)
 		{
 			if (tet->shape[tet->row + i][tet->col + j] == '#')
 			{
-				if (col + j >= size || row + i >= size)//redundant
-					return (0);
-				board[row + i][col + j] = tet->letter;//tet->shape[tet->row + i][tet->col + j];
+				//if (col + j >= size || row + i >= size)//redundant
+				//	return (0);
+				(brd->board)[row + i][col + j] = tet->letter;//tet->shape[tet->row + i][tet->col + j];
 			}
 			j++;
 		}
@@ -64,7 +64,7 @@ int		add_tet(char board[104][104], int size, int row, int col, t_tet *tet)
 	return (1);
 }
 
-int		fits(char board[104][104], int size, t_tet *tet, int row, int col)
+int		fits(t_board *brd, t_tet *tet, int row, int col)
 {
 	int i;
 	int j;
@@ -77,8 +77,8 @@ int		fits(char board[104][104], int size, t_tet *tet, int row, int col)
 		{
 			if (tet->shape[tet->row + i][tet->col + j] == '#')
 			{
-				if (col + j >= size || row + i >= size
-					|| board[row + i][col + j])
+				if (col + j >= brd->size || row + i >= brd->size
+					|| (brd->board)[row + i][col + j])
 					return (0);
 			}
 			j++;
@@ -88,7 +88,7 @@ int		fits(char board[104][104], int size, t_tet *tet, int row, int col)
 	return (1);
 }
 
-int		next_tet(char board[104][104], int size, t_list *tetriminos)
+int		next_tet(t_board *brd, t_list *tetriminos)
 {
 	int row;
 	int col;
@@ -96,18 +96,18 @@ int		next_tet(char board[104][104], int size, t_list *tetriminos)
 	if (!tetriminos)// MAKE SURE THIS MAKES SENSE HERE. Inessa: it does.
 		return (1);
 	row = 0;
-	while (row < size)
+	while (row < brd->size)
 	{
 		col = 0;
-		while (col < size)
+		while (col < brd->size)
 		{
-			if (fits(board, size, tetriminos->content, row, col))
+			if (fits(brd, tetriminos->content, row, col))
 			{
-				add_tet(board, size, row, col, tetriminos->content);
-				if (next_tet(board, size, tetriminos->next))
+				add_tet(brd, row, col, tetriminos->content);
+				if (next_tet(brd, tetriminos->next))
 					return (1);
 				else
-					delete_tet(board, size, row, col, tetriminos->content);
+					delete_tet(brd, row, col, tetriminos->content);
 			}
 			col++;
 		}
@@ -116,11 +116,11 @@ int		next_tet(char board[104][104], int size, t_list *tetriminos)
 	return (0);
 }
 
-int		solve(char board[104][104], int *size, t_list *tetriminos)
+int		solve(t_board *brd, t_list *tetriminos)
 {
-	while (!next_tet(board, *size, tetriminos))
+	while (!next_tet(brd, tetriminos))
 	{
-		(*size)++;
+		(brd->size)++;
 	}
 	return (1);
 }

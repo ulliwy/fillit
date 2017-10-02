@@ -6,7 +6,7 @@
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 13:47:15 by iprokofy          #+#    #+#             */
-/*   Updated: 2017/10/02 14:54:30 by iprokofy         ###   ########.fr       */
+/*   Updated: 2017/10/02 16:01:26 by iprokofy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ typedef struct			s_piece
 	int					top;
 }						t_piece;
 
+typedef struct 			s_board
+{
+	char				board[104][104];
+	int					size;
+}						t_board;
+
 t_list					*ft_lstnew(void *content);
 int						get_size(t_list *begin_list);
 void					ft_lstdel(t_list **alst);
@@ -52,8 +58,7 @@ void					ft_lstdel(t_list **alst);
 t_tet					*create_tet(char *str, int count);
 t_list					*create_list(int fd, char *buf);
 
-int						solve(char board[104][104], int *size,
-							t_list *tetriminos);
+int						solve(t_board *board, t_list *tetriminos);
 void					print_board(char board[104][104], int size);
 
 void					ft_putchar(char c);
