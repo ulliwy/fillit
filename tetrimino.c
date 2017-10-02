@@ -1,5 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tetrimino.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/02 13:52:51 by iprokofy          #+#    #+#             */
+/*   Updated: 2017/10/02 15:05:56 by iprokofy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*
+** created by: iprokofy, mvann
+*/
+
 #include "fillit.h"
-#include <stdio.h>
 
 int		calc_conn(char *str, int pos)
 {
@@ -22,8 +37,9 @@ t_tet	*get_tet(char *str, int top, int left, int count)
 	t_tet	*tet;
 	int		i;
 	int		j;
-	char	*alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char	*alpha;
 
+	alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	tet = (t_tet *)malloc(sizeof(t_tet));
 	tet->row = top;
 	tet->col = left;
@@ -39,21 +55,33 @@ t_tet	*get_tet(char *str, int top, int left, int count)
 	return (tet);
 }
 
+void	init_p(t_piece *p)
+{
+	p->num = 0;
+	p->con = 0;
+	p->left = 4;
+	p->top = 4;
+}
+
+void	set_p(t_piece *p, char *str, int i, int j)
+{
+	if (i % 5 < p->left)
+		p->left = i % 5;
+	if (j < p->top)
+		p->top = j;
+	p->con += calc_conn(str, i);
+	p->num++;
+}
+
 t_tet	*create_tet(char *str, int count)
 {
 	int		i;
 	int		j;
-	int		left;
-	int		top;
-	int 	num;
-	int		con;
+	t_piece	p;
 
+	init_p(&p);
 	i = 0;
 	j = 0;
-	num = 0;
-	con = 0;
-	top = 4;
-	left = 4;
 	while (i < 20)
 	{
 		if (i % 5 == 4)
@@ -65,23 +93,10 @@ t_tet	*create_tet(char *str, int count)
 		else if (!(str[i] == '#' || (str[i] == '.')))
 			return (NULL);
 		else if (str[i] == '#')
-		{
-			if (i % 5 < left)
-				left = i % 5;
-			if (j < top)
-				top = j;
-			con += calc_conn(str, i);
-			num++;
-		}
+			set_p(&p, str, i, j);
 		i++;
 	}
-	//printf("con %d\n", con);
-	//printf("num %d\n", num);
-	//printf("left: %d, top: %d\n\n", left, top);
-	if (num == 4 && (con == 6 || con == 8))
-	{
-		//printf("here\n");
-		return (get_tet(str, top, left, count));
-	}
+	if (p.num == 4 && (p.con == 6 || p.con == 8))
+		return (get_tet(str, p.top, p.left, count));
 	return (NULL);
 }

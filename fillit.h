@@ -1,3 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fillit.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/02 13:47:15 by iprokofy          #+#    #+#             */
+/*   Updated: 2017/10/02 14:54:30 by iprokofy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*
+** created by: iprokofy, mvann
+*/
+
 #ifndef FILLIT_H
 # define FILLIT_H
 
@@ -21,19 +37,27 @@ typedef struct			s_tet
 	char				shape[4][4];
 }						t_tet;
 
-t_list	*ft_lstnew(void *content);
-int		get_size(t_list *begin_list);
-void	ft_lstdel(t_list **alst, void (*del)(t_list *));
-void	ft_lstdelone(t_list *alst);
+typedef struct			s_piece
+{
+	int					num;
+	int					con;
+	int					left;
+	int					top;
+}						t_piece;
 
-t_tet	*create_tet(char *str, int count);
-t_list	*create_list(int fd);
+t_list					*ft_lstnew(void *content);
+int						get_size(t_list *begin_list);
+void					ft_lstdel(t_list **alst);
 
-int		solve(char board[104][104], int *size, t_list *tetriminos);
-void 	print_board(char board[104][104], int size);
+t_tet					*create_tet(char *str, int count);
+t_list					*create_list(int fd, char *buf);
 
-void	ft_putchar(char c);
-void	ft_putstr(char const *s);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
+int						solve(char board[104][104], int *size,
+							t_list *tetriminos);
+void					print_board(char board[104][104], int size);
+
+void					ft_putchar(char c);
+void					ft_putstr(char const *s);
+void					*ft_memcpy(void *dst, const void *src, size_t n);
 
 #endif

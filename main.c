@@ -1,39 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/02 13:27:46 by iprokofy          #+#    #+#             */
+/*   Updated: 2017/10/02 14:57:00 by iprokofy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*
+** created by: iprokofy, mvann
+*/
+
 #include "fillit.h"
-#include <stdio.h>
 
-int		put_error()
+int		put_msg(int type)
 {
-	ft_putstr("error\n");
+	if (type)
+		ft_putstr("usage: fillit file_name\n");
+	else
+		ft_putstr("error\n");
 	return (0);
-}
-
-int		put_usage()
-{
-	ft_putstr("usage: fillit file_name\n");
-	return (0);
-}
-
-void	print_list(t_list *tet)
-{
-	int		i;
-	int		j;
-
-	while (tet)
-	{
-		i = 0;
-		while(i < 4)
-		{
-			j = 0;
-			while (j < 4)
-			{
-				printf("%c", (((t_tet *)tet->content)->shape)[i][j]);
-				j++;
-			}
-			printf("\n");
-			i++;
-		}
-		tet = tet->next;
-	}
 }
 
 void	initialize_board(char board[104][104])
@@ -64,7 +53,7 @@ int		get_nearest_square(int size)
 	return (n);
 }
 
-void print_board(char board[104][104], int size)
+void	print_board(char board[104][104], int size)
 {
 	int row;
 	int col;
@@ -86,24 +75,24 @@ void print_board(char board[104][104], int size)
 int		main(int argc, char **argv)
 {
 	char	board[104][104];
+	char	buf[20];
 	t_list	*tetriminos;
 	int		fd;
 	int		size;
 
 	if (argc != 2)
-		return (put_usage());
+		return (put_msg(1));
 	initialize_board(board);
 	fd = open(argv[1], O_RDONLY);
 	if (!fd)
-		return (put_error());
-	tetriminos = create_list(fd);
+		return (put_msg(0));
+	tetriminos = create_list(fd, buf);
 	if (!tetriminos)
-		return (put_error());
+		return (put_msg(0));
 	size = get_size(tetriminos);
 	size = get_nearest_square(size);
-	//print_list(tetriminos);
 	if (!solve(board, &size, tetriminos))
-		return (put_error());
+		return (put_msg(0));
 	print_board(board, size);
 	return (0);
 }

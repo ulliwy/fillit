@@ -6,12 +6,15 @@
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 11:25:29 by iprokofy          #+#    #+#             */
-/*   Updated: 2017/10/02 12:28:12 by iprokofy         ###   ########.fr       */
+/*   Updated: 2017/10/02 14:55:08 by iprokofy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** created by: iprokofy, mvann
+*/
+
 #include "fillit.h"
-#include <stdio.h>
 
 int		get_size(t_list *begin_list)
 {
@@ -26,38 +29,44 @@ int		get_size(t_list *begin_list)
 	return (count);
 }
 
-void	ft_lstdelone(t_list *alst)
-{
-	free(alst->content);
-	free(alst);
-	alst = NULL;
-}
-
-void	ft_lstdel(t_list **alst, void (*del)(t_list *))
+void	ft_lstdel(t_list **alst)
 {
 	t_list	*temp;
-	t_list	*current;
 
 	if (!*alst)
 		return ;
-	current = *alst;
-	while (current)
+	while (*alst)
 	{
-		temp = current;
-		current = current->next;
-		del(temp);
+		temp = *alst;
+		*alst = (*alst)->next;
+		free((*alst)->content);
+		free((*alst));
+		(*alst) = NULL;
 	}
-	*alst = NULL;
 }
 
-t_list	*create_list(int fd)
+t_list	*ft_lstback(t_list *current, t_list **lst, t_tet *tet)
 {
-	char	buf[20];
+	if (!current)
+	{
+		current = ft_lstnew(tet);
+		*lst = current;
+	}
+	else
+	{
+		current->next = ft_lstnew(tet);
+		current = current->next;
+	}
+	return (current);
+}
+
+t_list	*create_list(int fd, char *buf)
+{
 	t_tet	*tet;
 	t_list	*lst;
 	t_list	*current;
 	int		count;
-	int 	is_empty;
+	int		is_empty;
 
 	count = 0;
 	current = NULL;
@@ -67,18 +76,7 @@ t_list	*create_list(int fd)
 		if (read(fd, buf, 20) != 20)
 			return (NULL);
 		if ((tet = create_tet(buf, count)))
-		{
-			if (!current)
-			{
-				current = ft_lstnew(tet);
-				lst = current;
-			}
-			else
-			{
-				current->next = ft_lstnew(tet);
-				current = current->next;
-			}
-		}
+			current = ft_lstback(current, &lst, tet);
 		else
 			return (NULL);
 		if (!read(fd, buf, 1))

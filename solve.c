@@ -6,9 +6,13 @@
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:47:47 by mvann             #+#    #+#             */
-/*   Updated: 2017/10/02 13:19:07 by iprokofy         ###   ########.fr       */
+/*   Updated: 2017/10/02 14:01:47 by iprokofy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** created by: iprokofy, mvann
+*/
 
 #include "fillit.h"
 
@@ -25,8 +29,8 @@ int		delete_tet(char board[104][104], int size, int row, int col, t_tet *tet)
 		{
 			if (tet->shape[tet->row + i][tet->col + j] == '#')
 			{
-				if (col + j >= size || row + i >= size)
-			 		return (0);
+				if (col + j >= size || row + i >= size)//redundan
+					return (0);
 				board[row + i][col + j] = 0;
 			}
 			j++;
@@ -49,9 +53,8 @@ int		add_tet(char board[104][104], int size, int row, int col, t_tet *tet)
 		{
 			if (tet->shape[tet->row + i][tet->col + j] == '#')
 			{
-				size++;
-				//if (col + j >= size || row + i >= size)
-			 	//	return (0);
+				if (col + j >= size || row + i >= size)//redundant
+					return (0);
 				board[row + i][col + j] = tet->letter;//tet->shape[tet->row + i][tet->col + j];
 			}
 			j++;
@@ -76,7 +79,7 @@ int		fits(char board[104][104], int size, t_tet *tet, int row, int col)
 			{
 				if (col + j >= size || row + i >= size
 					|| board[row + i][col + j])
-			 		return (0);
+					return (0);
 			}
 			j++;
 		}
@@ -90,7 +93,7 @@ int		next_tet(char board[104][104], int size, t_list *tetriminos)
 	int row;
 	int col;
 
-	if (!tetriminos) // MAKE SURE THIS MAKES SENSE HERE
+	if (!tetriminos)// MAKE SURE THIS MAKES SENSE HERE. Inessa: it does.
 		return (1);
 	row = 0;
 	while (row < size)
