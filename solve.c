@@ -6,7 +6,7 @@
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:47:47 by mvann             #+#    #+#             */
-/*   Updated: 2017/10/02 15:57:06 by iprokofy         ###   ########.fr       */
+/*   Updated: 2017/10/02 16:06:10 by iprokofy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,7 @@ int		delete_tet(t_board *brd, int row, int col, t_tet *tet)
 		while (j < 4 - tet->col)
 		{
 			if (tet->shape[tet->row + i][tet->col + j] == '#')
-			{
-				//if (col + j >= size || row + i >= size)//redundan
-				//	return (0);
 				(brd->board)[row + i][col + j] = 0;
-			}
 			j++;
 		}
 		i++;
@@ -52,11 +48,7 @@ int		add_tet(t_board *brd, int row, int col, t_tet *tet)
 		while (j < 4 - tet->col)
 		{
 			if (tet->shape[tet->row + i][tet->col + j] == '#')
-			{
-				//if (col + j >= size || row + i >= size)//redundant
-				//	return (0);
-				(brd->board)[row + i][col + j] = tet->letter;//tet->shape[tet->row + i][tet->col + j];
-			}
+				(brd->board)[row + i][col + j] = tet->letter;
 			j++;
 		}
 		i++;
@@ -93,7 +85,7 @@ int		next_tet(t_board *brd, t_list *tetriminos)
 	int row;
 	int col;
 
-	if (!tetriminos)// MAKE SURE THIS MAKES SENSE HERE. Inessa: it does.
+	if (!tetriminos)
 		return (1);
 	row = 0;
 	while (row < brd->size)
