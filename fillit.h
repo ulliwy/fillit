@@ -6,10 +6,18 @@
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 16:06:05 by mvann             #+#    #+#             */
-/*   Updated: 2017/10/02 17:02:45 by iprokofy         ###   ########.fr       */
+/*   Updated: 2017/10/03 12:44:54 by iprokofy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-ude <string.h>
+
+/*
+** created by: iprokofy, mvann
+*/
+
+#ifndef FILLIT_H
+# define FILLIT_H
+
+# include <string.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
