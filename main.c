@@ -6,7 +6,7 @@
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 13:27:46 by iprokofy          #+#    #+#             */
-/*   Updated: 2017/10/02 16:41:06 by iprokofy         ###   ########.fr       */
+/*   Updated: 2017/10/02 17:03:04 by iprokofy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		get_nearest_square(int size)
 	int n;
 
 	n = 2;
-	while (size * 4 < n * n)
+	while (size * 4 > n * n)
 		n++;
 	return (n);
 }

@@ -5,19 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/02 13:47:15 by iprokofy          #+#    #+#             */
-/*   Updated: 2017/10/02 16:09:45 by iprokofy         ###   ########.fr       */
+/*   Created: 2017/10/02 16:06:05 by mvann             #+#    #+#             */
+/*   Updated: 2017/10/02 17:02:45 by iprokofy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-** created by: iprokofy, mvann
-*/
-
-#ifndef FILLIT_H
-# define FILLIT_H
-
-# include <string.h>
+ude <string.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
