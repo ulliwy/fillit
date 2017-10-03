@@ -6,7 +6,7 @@
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 13:47:15 by iprokofy          #+#    #+#             */
-/*   Updated: 2017/10/02 16:01:26 by iprokofy         ###   ########.fr       */
+/*   Updated: 2017/10/02 16:06:05 by mvann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct			s_piece
 	int					top;
 }						t_piece;
 
-typedef struct 			s_board
+typedef struct			s_board
 {
 	char				board[104][104];
 	int					size;
