@@ -6,7 +6,7 @@
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/02 13:27:46 by iprokofy          #+#    #+#             */
-/*   Updated: 2017/10/02 15:48:31 by iprokofy         ###   ########.fr       */
+/*   Updated: 2017/10/02 16:41:06 by iprokofy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int		main(int argc, char **argv)
 	char	buf[20];
 	t_list	*tetriminos;
 	int		fd;
-	int		size;
 
 	if (argc != 2)
 		return (put_msg(1));
@@ -89,8 +88,7 @@ int		main(int argc, char **argv)
 	tetriminos = create_list(fd, buf);
 	if (!tetriminos)
 		return (put_msg(0));
-	size = get_size(tetriminos);
-	size = get_nearest_square(b.size);
+	b.size = get_nearest_square(get_size(tetriminos));
 	if (!solve(&b, tetriminos))
 		return (put_msg(0));
 	print_board(b.board, b.size);

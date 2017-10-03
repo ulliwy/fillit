@@ -6,7 +6,7 @@
 /*   By: iprokofy <iprokofy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:47:47 by mvann             #+#    #+#             */
-/*   Updated: 2017/10/02 16:06:10 by iprokofy         ###   ########.fr       */
+/*   Updated: 2017/10/02 16:15:37 by iprokofy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,6 @@ int		next_tet(t_board *brd, t_list *tetriminos)
 int		solve(t_board *brd, t_list *tetriminos)
 {
 	while (!next_tet(brd, tetriminos))
-	{
 		(brd->size)++;
-	}
 	return (1);
 }
